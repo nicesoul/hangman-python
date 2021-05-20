@@ -24,7 +24,7 @@ class Hangman():
         self.lives = 5
         self.turn_count = 0
         self.error_count = 0
-        # print(self.word_to_find)
+
         # pass
 
     def play(self):
@@ -36,6 +36,24 @@ class Hangman():
             proper_letter = re.match("[a-zA-Z]", player_input)
         print('your letter is', player_input)
         print(self.word_to_find)
+        correctly_guessed_letters = []
+        for i in range(len(self.word_to_find)):
+            correctly_guessed_letters.append('_')
+        # print(correctly_guessed_letters)
+        letter_position = []
+        for index, letter in enumerate(self.word_to_find):
+            if player_input == letter:
+                letter_position.append(index)
+        print(letter_position)
+        # next  2 lines should be collapsed in one with list comprehension
+        for i in letter_position: 
+          correctly_guessed_letters[i] = self.word_to_find[i]
+        print(correctly_guessed_letters)
+        word = correctly_guessed_letters
+        return word
+
+            
+
         
         
 
