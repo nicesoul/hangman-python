@@ -1,0 +1,4 @@
+# is this is a comment too, no? :) 
+
+so far you don't need any specific libraries to play
+working in python 3.8.5
