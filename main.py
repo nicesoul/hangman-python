@@ -6,3 +6,6 @@ and ending of the game here. or not??? :)
 """
 
 import utils.game as game
+
+# enjoy )))) 
+game.Hangman().start_game()
