@@ -8,6 +8,18 @@ import re     # Regural expression
 import os     # Miscellaneous operating system interfaces
 os.system('') # Execute the command(a string) in a subshell
 
+import sys
+
+HELP = """
+Hangman-python by nicesoul
+Word guessing game without a punishment
+Because we love you so much (c)
+
+OPTIONS:
+  -h, --help  display this help
+  -small      choose a list of  6 words to guess
+  -large      choose a list of 12 words to guess
+       """
 
 class Terminal_colors(): # ANSI escape sequences
     reset_style = '\033[0m'
@@ -26,9 +38,28 @@ class Terminal_colors(): # ANSI escape sequences
 class Hangman():
     """ Here it goes
     """
+    cl_opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
+    cl_args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
+
+    print(cl_opts,cl_args)
+
+    if '-small' in cl_opts:
+        words = ['becode', 'mamba', 'learning', 'mathematics', 'sessions']
+    elif '-large' in cl_opts:
+        words = ['clouds', 'orange', 'sheep', 'Python', 'program', 'sky', 'ground', "child", "bird", "ocean", "answer", "xylophone"]
+    elif '--help' in cl_opts or '-h' in cl_opts:
+        raise SystemExit(HELP)
+    elif len(cl_opts) == 0 and len(cl_args) == 0:
+        words = ['GOTCHA','Ketchup']
+    else:
+        raise SystemExit(HELP)
+    #else: 
+    #    raise SystemExit(f"Usage: {sys.argv[0]} (-c | -u | -l) <arguments>...")
+    
 
     def __init__(self) -> None:
-        self.possible_words = ['becode', 'mamba', 'learning', 'mathematics', 'sessions']
+        #self.possible_words = ['becode', 'mamba', 'learning', 'mathematics', 'sessions']
+        self.possible_words = self.words
         # random.sample() creates a list but I need an uppercase string
         self.word = str(random.sample(self.possible_words, 1)[0].upper())
         # I am just starting to use and understand list comprehension
