@@ -4,6 +4,36 @@ import random
 import re
 from typing import List
 
+import sys
+
+HELP = """
+Hangman-python by Lyes
+Modded by Vadym
+Visit BeCode.org to find your dream :)
+
+USAGE:
+    main_ready [-small | -large] [-color]
+
+OPTIONS:
+    --help      display this help
+    -small      choose a list of  6 words to guess
+    -large      choose a list of 12 words to guess
+    -color      display guessed letters in color
+       """
+"""
+command_line_arguments   = [arg for arg in sys.argv[1:]]
+
+if '-small' in command_line_arguments:
+    words = ['becode', 'mamba', 'learning', 'mathematics', 'sessions']
+elif '-large' in command_line_arguments:
+    words = ['clouds', 'orange', 'sheep', 'Python', 'program', 'sky', 'ground', "child", "bird", "ocean", "answer", "xylophone"]
+elif '--help' in command_line_arguments:
+    raise SystemExit(HELP)
+elif len(command_line_arguments) == 0:
+    pass
+else:
+    raise SystemExit(HELP)
+"""
 
 class Hangman:
     """ Class defining my game 'Hangman', characterized by :
@@ -33,6 +63,23 @@ class Hangman:
         self.possible_words = ['test', 'rescue', 'interfere', 'light', 'woozy',
                                'fetch', 'wrong', 'bruise'] + self.possible_words_default
         self.word_to_find = list(random.choice(self.possible_words))
+
+        #####
+        command_line_arguments = [arg for arg in sys.argv[1:]]
+
+        if '-small' in command_line_arguments:
+            words = ['becode', 'mamba', 'learning', 'mathematics', 'sessions']
+        elif '-large' in command_line_arguments:
+            words = ['clouds', 'orange', 'sheep', 'Python', 'program', 'sky', 'ground', "child", "bird", "ocean",         "answer", "xylophone"]
+        elif '--help' in command_line_arguments:
+            raise SystemExit(HELP)
+        elif len(command_line_arguments) == 0:
+            words = self.possible_words
+        else:
+            raise SystemExit(HELP)
+
+        self.word_to_find = list(random.choice(words))
+
         Hangman.correctly_guessed_letters = ['_'] * len(self.word_to_find)
         Hangman.lives = 5
         Hangman.turn_count = 0
